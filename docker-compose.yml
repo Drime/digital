@@ -12,12 +12,6 @@ services:
     - "redis:redis"
     ports:
     - "5000:5000"
-    labels:
-    - "traefik.enable=true"
-    - "traefik.http.routers.counter.rule=Host(`counter.bankersen.eu`)"
-    - "traefik.http.routers.counter.entrypoints=websecure"
-    - "traefik.http.routers.counter.tls.certresolver=myresolver"
-    - "traefik.http.services.counter.loadbalancer.server.port=5000"
     restart: unless-stopped
     volumes:
       - "./src/server.py:/code/server.py"
