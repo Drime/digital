@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  redis:
+    image: redis:6.2.7
+    networks:
+      - docker_default
+
+  app:
+    image: page-hit-counter
+    links:
+    - "redis:redis"
+    ports:
+    - "5000:5000"
+    labels:
+    - "traefik.enable=true"
+    - "traefik.http.routers.counter.rule=Host(`counter.bankersen.eu`)"
+    - "traefik.http.routers.counter.entrypoints=websecure"
+    - "traefik.http.routers.counter.tls.certresolver=myresolver"
+    - "traefik.http.services.counter.loadbalancer.server.port=5000"
+    restart: unless-stopped
+    volumes:
+      - "./src/server.py:/code/server.py"
+      - "./src/templates:/code/templates"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "1"
+    networks:
+      - docker_default
+
+networks:
+  docker_default:
+    driver: bridge

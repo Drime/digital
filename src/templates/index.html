@@ -1,0 +1,43 @@
+<html>
+<head>
+<style>
+html, body {
+    height: 100%;
+}
+
+html {
+    display: table;
+    margin: auto;
+}
+
+body {
+    display: table-cell;
+    vertical-align: middle;
+    background-color: #043c8c;
+  	color: white;
+    text-align: center;
+}
+</style>
+</head>
+<body>
+
+{% if unique %}
+<h1>WE ARE DIGITAL</h1>
+<img src="https://c.tenor.com/YYkpSHJ9GyAAAAAd/gibert-taxi.gif" alt="it has begun"/>
+
+    {% if won %}
+        <h1>You WON the first assignment!</h1>
+        <h2>Go find Hylke to collect your prize!</h2>
+    {% else %}
+        <h1>{{ count }}</h1>
+        <h1>You failed the first assignment!</h1>
+    {% endif %}
+{% else %}
+    <h1>You failed the first assignment!</h1>
+{% endif %}
+
+</body>
+</html>
+
+
+
